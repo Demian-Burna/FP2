@@ -3,7 +3,6 @@ services:
   - type: web
     name: finance-manager-api
     env: python
-    plan: free
     buildCommand: |
       cd backend &&
       pip install -r requirements.txt &&
@@ -41,7 +40,6 @@ services:
   - type: web
     name: finance-manager-frontend
     env: static
-    plan: free
     buildCommand: |
       cd frontend &&
       npm ci &&
