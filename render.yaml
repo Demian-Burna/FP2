@@ -1,0 +1,70 @@
+services:
+  # Backend API (Free Tier)
+  - type: web
+    name: finance-manager-api
+    env: python
+    plan: free
+    buildCommand: |
+      cd backend &&
+      pip install -r requirements.txt &&
+      python manage.py collectstatic --noinput &&
+      python manage.py migrate &&
+      python manage.py loaddata fixtures/initial_data.json
+    startCommand: |
+      cd backend &&
+      gunicorn --bind 0.0.0.0:$PORT finance_manager.wsgi:application
+    healthCheckPath: /api/
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: finance_manager.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: false
+      - key: ALLOWED_HOSTS
+        value: finance-manager-api.onrender.com,localhost,127.0.0.1
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false  
+      - key: SUPABASE_SECRET
+        sync: false
+      - key: EXCHANGE_API_KEY
+        sync: false
+      - key: FRONTEND_URL
+        value: https://finance-manager-frontend.onrender.com
+      - key: DATABASE_URL
+        fromDatabase:
+          name: finance-manager-db
+          property: connectionString
+
+  # Frontend React (Free Static Site)
+  - type: web
+    name: finance-manager-frontend
+    env: static
+    plan: free
+    buildCommand: |
+      cd frontend &&
+      npm ci &&
+      npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://finance-manager-api.onrender.com/api
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+
+databases:
+  # PostgreSQL Free Tier (solo una permitida)
+  - name: finance-manager-db
+    databaseName: finance_manager
+    user: finance_user
+    plan: free
+
+# Nota: Redis y Cron Jobs no están disponibles en el plan gratuito
+# Para jobs programados, usar alternativas como:
+# - GitHub Actions con cron
+# - Servicios externos gratuitos como EasyCron
+# - Webhooks programados desde el frontend

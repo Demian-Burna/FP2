@@ -1,0 +1,145 @@
+[
+{
+  "model": "accounts.accounttype",
+  "pk": 1,
+  "fields": {
+    "name": "Cuenta Bancaria",
+    "code": "bank_account",
+    "description": "Cuenta corriente o caja de ahorro bancaria",
+    "icon": "bank",
+    "allows_negative_balance": false,
+    "is_credit_account": false,
+    "created_at": "2024-01-01T00:00:00Z"
+  }
+},
+{
+  "model": "accounts.accounttype",
+  "pk": 2,
+  "fields": {
+    "name": "Tarjeta de Crédito",
+    "code": "credit_card",
+    "description": "Tarjeta de crédito para compras en cuotas",
+    "icon": "credit-card",
+    "allows_negative_balance": true,
+    "is_credit_account": true,
+    "created_at": "2024-01-01T00:00:00Z"
+  }
+},
+{
+  "model": "accounts.accounttype",
+  "pk": 3,
+  "fields": {
+    "name": "Efectivo",
+    "code": "cash",
+    "description": "Dinero en efectivo",
+    "icon": "money",
+    "allows_negative_balance": false,
+    "is_credit_account": false,
+    "created_at": "2024-01-01T00:00:00Z"
+  }
+},
+{
+  "model": "accounts.accounttype",
+  "pk": 4,
+  "fields": {
+    "name": "Billetera Digital",
+    "code": "digital_wallet",
+    "description": "MercadoPago, Ualá, etc.",
+    "icon": "mobile-alt",
+    "allows_negative_balance": false,
+    "is_credit_account": false,
+    "created_at": "2024-01-01T00:00:00Z"
+  }
+},
+{
+  "model": "accounts.accounttype",
+  "pk": 5,
+  "fields": {
+    "name": "Inversión",
+    "code": "investment",
+    "description": "Cuentas de inversión y plazo fijo",
+    "icon": "chart-line",
+    "allows_negative_balance": false,
+    "is_credit_account": false,
+    "created_at": "2024-01-01T00:00:00Z"
+  }
+},
+{
+  "model": "currency.currency",
+  "pk": "ARS",
+  "fields": {
+    "name": "Peso Argentino",
+    "symbol": "$",
+    "decimal_places": 2,
+    "is_active": true,
+    "is_base": true,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+},
+{
+  "model": "currency.currency",
+  "pk": "USD",
+  "fields": {
+    "name": "Dólar Estadounidense",
+    "symbol": "US$",
+    "decimal_places": 2,
+    "is_active": true,
+    "is_base": false,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+},
+{
+  "model": "currency.currency",
+  "pk": "EUR",
+  "fields": {
+    "name": "Euro",
+    "symbol": "€",
+    "decimal_places": 2,
+    "is_active": true,
+    "is_base": false,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+},
+{
+  "model": "currency.currency",
+  "pk": "BRL",
+  "fields": {
+    "name": "Real Brasileño",
+    "symbol": "R$",
+    "decimal_places": 2,
+    "is_active": true,
+    "is_base": false,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+},
+{
+  "model": "currency.currency",
+  "pk": "CLP",
+  "fields": {
+    "name": "Peso Chileno",
+    "symbol": "CL$",
+    "decimal_places": 0,
+    "is_active": true,
+    "is_base": false,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+},
+{
+  "model": "currency.currency",
+  "pk": "UYU",
+  "fields": {
+    "name": "Peso Uruguayo",
+    "symbol": "UY$",
+    "decimal_places": 2,
+    "is_active": true,
+    "is_base": false,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+}
+]
