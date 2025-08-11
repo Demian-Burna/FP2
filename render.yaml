@@ -1,8 +1,9 @@
 services:
-  # Backend API (Free Tier)
+  # Backend API (Free Tier - Sin base de datos de Render)
   - type: web
     name: finance-manager-api
     env: python
+    plan: free
     buildCommand: |
       cd backend &&
       pip install -r requirements.txt &&
@@ -25,17 +26,16 @@ services:
       - key: SUPABASE_URL
         sync: false
       - key: SUPABASE_KEY
-        sync: false  
+        sync: false
       - key: SUPABASE_SECRET
         sync: false
       - key: EXCHANGE_API_KEY
         sync: false
       - key: FRONTEND_URL
         value: https://finance-manager-frontend.onrender.com
+      # Base de datos externa (Supabase PostgreSQL)
       - key: DATABASE_URL
-        fromDatabase:
-          name: finance-manager-db
-          property: connectionString
+        sync: false
 
   # Frontend React (Free Static Site)
   - type: web
@@ -55,15 +55,17 @@ services:
       - key: VITE_SUPABASE_ANON_KEY
         sync: false
 
-databases:
-  # PostgreSQL Free Tier (solo una permitida)
-  - name: finance-manager-db
-    databaseName: finance_manager
-    user: finance_user
-    plan: free
-
-# Nota: Redis y Cron Jobs no están disponibles en el plan gratuito
-# Para jobs programados, usar alternativas como:
-# - GitHub Actions con cron
-# - Servicios externos gratuitos como EasyCron
+# NOTA: No se crean bases de datos en Render para usar solo el plan gratuito
+# La base de datos PostgreSQL se maneja externamente con Supabase:
+# 1. Crear proyecto en https://supabase.com (gratuito)
+# 2. Obtener el connection string de PostgreSQL
+# 3. Configurar DATABASE_URL manualmente en las variables de entorno del servicio
+#
+# Formato del connection string de Supabase:
+# postgresql://postgres:[PASSWORD]@db.[PROJECT_REF].supabase.co:5432/postgres
+#
+# Redis y Cron Jobs no están disponibles en el plan gratuito de Render.
+# Alternativas gratuitas para jobs programados:
+# - GitHub Actions con cron schedules
+# - Servicios externos como EasyCron (plan gratuito)
 # - Webhooks programados desde el frontend
