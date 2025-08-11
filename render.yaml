@@ -37,7 +37,7 @@ services:
         sync: false
 
   # Frontend React (Free Static Site)
-  - type: web
+  - type: static_site
     name: finance-manager-frontend
     env: static
     buildCommand: |
